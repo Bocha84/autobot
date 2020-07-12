@@ -1,24 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import numpy as np
-import cv2
-import socket
 import os
-import io
-import time
-import imghdr
-import sys
-from threading import Timer
 from threading import Thread
-from PIL import Image
-from Command import COMMAND as cmd
-from Thread import *
-from Client_Ui import Ui_Client
-from Video import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+
+from PyQt5 import QtCore
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from client.Client_Ui import Ui_Client
+from client.Command import COMMAND as cmd
+from client.Thread import *
+from client.Video import *
 
 
 class mywindow(QMainWindow, Ui_Client):
@@ -48,9 +40,15 @@ class mywindow(QMainWindow, Ui_Client):
         self.name.setAlignment(QtCore.Qt.AlignCenter)
         self.label_Servo1.setText("90")
         self.label_Servo2.setText("90")
-        self.label_Video.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
-        self.label_Servo1.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
-        self.label_Servo2.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+        self.label_Video.setAlignment(
+            QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter
+        )
+        self.label_Servo1.setAlignment(
+            QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter
+        )
+        self.label_Servo2.setAlignment(
+            QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter
+        )
 
         self.label_FineServo1.setAlignment(
             QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter
@@ -433,24 +431,36 @@ class mywindow(QMainWindow, Ui_Client):
 
     def on_btn_Buzzer(self):
         if self.Btn_Buzzer.text() == "Buzzer":
-            self.TCP.sendData(cmd.CMD_BUZZER + self.intervalChar + "1" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_BUZZER + self.intervalChar + "1" + self.endChar
+            )
             self.Btn_Buzzer.setText("Noise")
         else:
-            self.TCP.sendData(cmd.CMD_BUZZER + self.intervalChar + "0" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_BUZZER + self.intervalChar + "0" + self.endChar
+            )
             self.Btn_Buzzer.setText("Buzzer")
 
     def on_btn_Ultrasonic(self):
         if self.Ultrasonic.text() == "Ultrasonic":
-            self.TCP.sendData(cmd.CMD_SONIC + self.intervalChar + "1" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_SONIC + self.intervalChar + "1" + self.endChar
+            )
         else:
-            self.TCP.sendData(cmd.CMD_SONIC + self.intervalChar + "0" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_SONIC + self.intervalChar + "0" + self.endChar
+            )
             self.Ultrasonic.setText("Ultrasonic")
 
     def on_btn_Light(self):
         if self.Light.text() == "Light":
-            self.TCP.sendData(cmd.CMD_LIGHT + self.intervalChar + "1" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_LIGHT + self.intervalChar + "1" + self.endChar
+            )
         else:
-            self.TCP.sendData(cmd.CMD_LIGHT + self.intervalChar + "0" + self.endChar)
+            self.TCP.sendData(
+                cmd.CMD_LIGHT + self.intervalChar + "0" + self.endChar
+            )
             self.Light.setText("Light")
 
     def Change_Left_Right(self):  # Left or Right
@@ -687,7 +697,9 @@ class mywindow(QMainWindow, Ui_Client):
             self.h = self.IP.text()
             self.TCP.StartTcpClient(self.h,)
             try:
-                self.streaming = Thread(target=self.TCP.streaming, args=(self.h,))
+                self.streaming = Thread(
+                    target=self.TCP.streaming, args=(self.h,)
+                )
                 self.streaming.start()
             except:
                 print("video error")
@@ -697,7 +709,7 @@ class mywindow(QMainWindow, Ui_Client):
             except:
                 print("recv error")
             self.Btn_Connect.setText("Disconnect")
-            print("Server address:" + str(self.h) + "\n")
+            print("server address:" + str(self.h) + "\n")
         elif self.Btn_Connect.text() == "Disconnect":
             self.Btn_Connect.setText("Connect")
             try:
@@ -753,7 +765,13 @@ class mywindow(QMainWindow, Ui_Client):
                     self.Ultrasonic.setText("Obstruction:%s cm" % Massage[1])
                 elif cmd.CMD_LIGHT in Massage:
                     self.Light.setText(
-                        "Left:" + Massage[1] + "V" + " " + "Right:" + Massage[2] + "V"
+                        "Left:"
+                        + Massage[1]
+                        + "V"
+                        + " "
+                        + "Right:"
+                        + Massage[2]
+                        + "V"
                     )
                 elif cmd.CMD_POWER in Massage:
                     percent_power = int((float(Massage[1]) - 7) / 1.40 * 100)

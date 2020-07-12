@@ -118,7 +118,7 @@ class Ui_server_ui(object):
     def retranslateUi(self, server_ui):
         _translate = QtCore.QCoreApplication.translate
         server_ui.setWindowTitle(_translate("server_ui", "Form"))
-        self.label.setText(_translate("server_ui", "Server Off"))
+        self.label.setText(_translate("server_ui", "server Off"))
         self.Button_Server.setText(_translate("server_ui", "Off"))
         self.label_2.setText(_translate("server_ui", "freenove"))
         self.pushButton_Close.setText(_translate("server_ui", "×"))

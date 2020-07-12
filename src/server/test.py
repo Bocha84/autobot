@@ -1,5 +1,4 @@
-import time
-from Led import *
+from server.Led import *
 
 led = Led()
 
@@ -25,7 +24,7 @@ def test_Led():
         print("\nEnd of program")
 
 
-from Motor import *
+from server.Motor import *
 
 PWM = Motor()
 
@@ -51,7 +50,7 @@ def test_Motor():
         print("\nEnd of program")
 
 
-from Ultrasonic import *
+from server.Ultrasonic import *
 
 ultrasonic = Ultrasonic()
 
@@ -66,7 +65,7 @@ def test_Ultrasonic():
         print("\nEnd of program")
 
 
-from Line_Tracking import *
+from server.Line_Tracking import *
 
 line = Line_Tracking()
 
@@ -96,7 +95,7 @@ def test_Infrared():
         print("\nEnd of program")
 
 
-from servo import *
+from server.servo import *
 
 pwm = Servo()
 
@@ -122,7 +121,7 @@ def test_Servo():
         print("\nEnd of program")
 
 
-from ADC import *
+from server.ADC import *
 
 adc = Adc()
 
@@ -131,9 +130,17 @@ def test_Adc():
     try:
         while True:
             Left_IDR = adc.recvADC(0)
-            print("The photoresistor voltage on the left is " + str(Left_IDR) + "V")
+            print(
+                "The photoresistor voltage on the left is "
+                + str(Left_IDR)
+                + "V"
+            )
             Right_IDR = adc.recvADC(1)
-            print("The photoresistor voltage on the right is " + str(Right_IDR) + "V")
+            print(
+                "The photoresistor voltage on the right is "
+                + str(Right_IDR)
+                + "V"
+            )
             Power = adc.recvADC(2)
             print("The battery voltage is " + str(Power * 3) + "V")
             time.sleep(1)
@@ -142,7 +149,7 @@ def test_Adc():
         print("\nEnd of program")
 
 
-from Buzzer import *
+from server.Buzzer import *
 
 buzzer = Buzzer()
 

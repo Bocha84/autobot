@@ -1,18 +1,15 @@
-import io
+import getopt
 import os
-import socket
-import struct
-import time
-import picamera
-import sys, getopt
-from Thread import *
+import sys
 from threading import Thread
-from server import Server
-from server_ui import Ui_server_ui
-from PyQt5 import QtCore, QtGui, QtWidgets
+
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+from server.Thread import *
+from server.server import Server
+from server.server_ui import Ui_server_ui
 
 
 class mywindow(QMainWindow, Ui_server_ui):
@@ -60,7 +57,7 @@ class mywindow(QMainWindow, Ui_server_ui):
                 self.ReadData.start()
                 self.power.start()
 
-                self.label.setText("Server On")
+                self.label.setText("server On")
                 self.Button_Server.setText("Off")
             elif o in ("-n"):
                 self.user_ui = False
@@ -83,8 +80,8 @@ class mywindow(QMainWindow, Ui_server_ui):
         os._exit(0)
 
     def on_pushButton(self):
-        if self.label.text() == "Server Off":
-            self.label.setText("Server On")
+        if self.label.text() == "server Off":
+            self.label.setText("server On")
             self.Button_Server.setText("Off")
             self.TCP_Server.tcp_Flag = True
             print("Open TCP")
@@ -96,8 +93,8 @@ class mywindow(QMainWindow, Ui_server_ui):
             self.ReadData.start()
             self.power.start()
 
-        elif self.label.text() == "Server On":
-            self.label.setText("Server Off")
+        elif self.label.text() == "server On":
+            self.label.setText("server Off")
             self.Button_Server.setText("On")
             self.TCP_Server.tcp_Flag = False
             try:

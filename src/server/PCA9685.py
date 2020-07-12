@@ -1,8 +1,12 @@
 #!/usr/bin/python
 
-import time
 import math
-import smbus
+import time
+
+try:
+    import smbus
+except ImportError:
+    from fake_rpi import smbus
 
 # ============================================================================
 # Raspi PCA9685 16-Channel PWM Servo Driver
@@ -69,7 +73,9 @@ class PCA9685:
 
     def setServoPulse(self, channel, pulse):
         "Sets the Servo Pulse,The PWM frequency must be 50HZ"
-        pulse = pulse * 4096 / 20000  # PWM frequency is 50HZ,the period is 20000us
+        pulse = (
+            pulse * 4096 / 20000
+        )  # PWM frequency is 50HZ,the period is 20000us
         self.setPWM(channel, 0, int(pulse))
 
 

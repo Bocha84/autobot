@@ -9,7 +9,9 @@ def _async_raise(tid, exctype):
     tid = ctypes.c_long(tid)
     if not inspect.isclass(exctype):
         exctype = type(exctype)
-    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, ctypes.py_object(exctype))
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(
+        tid, ctypes.py_object(exctype)
+    )
     if res == 0:
         raise ValueError("invalid thread id")
     elif res != 1:
@@ -18,19 +20,18 @@ def _async_raise(tid, exctype):
 
 
 def stop_thread(thread):
-    for i in range(5):
-        _async_raise(thread.ident, SystemExit)
+    _async_raise(thread.ident, SystemExit)
 
 
 def test():
     while True:
         print("-------")
-        time.sleep(1)
+        time.sleep(0.05)
 
 
 if __name__ == "__main__":
     t = threading.Thread(target=test)
     t.start()
-    time.sleep(5)
+    time.sleep(0.2)
     print("main thread sleep finish")
     stop_thread(t)

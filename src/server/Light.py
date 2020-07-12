@@ -1,6 +1,5 @@
-import time
-from Motor import *
-from ADC import *
+from server.ADC import *
+from server.Motor import *
 
 
 class Light:

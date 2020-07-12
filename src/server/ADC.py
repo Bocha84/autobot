@@ -1,4 +1,7 @@
-import smbus
+try:
+    import smbus
+except ImportError:
+    from fake_rpi import smbus
 import time
 
 
@@ -26,7 +29,9 @@ class Adc:
     def analogReadPCF8591(self, chn):  # PCF8591 read ADC value,chn:0,1,2,3
         value = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         for i in range(9):
-            value[i] = self.bus.read_byte_data(self.ADDRESS, self.PCF8591_CMD + chn)
+            value[i] = self.bus.read_byte_data(
+                self.ADDRESS, self.PCF8591_CMD + chn
+            )
         value = sorted(value)
         return value[4]
 

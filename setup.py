@@ -62,13 +62,17 @@ if parser.has_section("console_scripts"):
 if parser.has_section("extras_require"):
     for opt in parser.options("extras_require"):
         extras = [
-            x.strip() for x in parser.get("extras_require", opt).split(";") if x.strip()
+            x.strip()
+            for x in parser.get("extras_require", opt).split(";")
+            if x.strip()
         ]
         setup_args["extras_require"][opt] = extras
 
 
 if src_dir:
-    setup_args["packages"] = setuptools.find_packages(src_dir, exclude=excl_dirs)
+    setup_args["packages"] = setuptools.find_packages(
+        src_dir, exclude=excl_dirs
+    )
     setup_args["provides"] = setuptools.find_packages(src_dir)
     setup_args["package_dir"] = {"": src_dir}
 setuptools.setup(**setup_args)

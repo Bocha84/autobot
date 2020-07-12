@@ -1,14 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import numpy as np
-import cv2
-import socket
 import io
-import sys
+import socket
 import struct
+import sys
+
+import cv2
+import numpy as np
 from PIL import Image
-from multiprocessing import Process
-from Command import COMMAND as cmd
 
 
 class VideoStreaming:
@@ -108,7 +107,9 @@ class VideoStreaming:
             self.connect_Flag = True
             print("Connecttion Successful !")
         except Exception as e:
-            print("Connect to server Faild!: Server IP is right? Server is opend?")
+            print(
+                "Connect to server Faild!: server IP is right? server is opend?"
+            )
             self.connect_Flag = False
 
 

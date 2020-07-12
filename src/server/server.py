@@ -1,25 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import fcntl
 import io
 import socket
 import struct
-import time
-import picamera
-import fcntl
-import sys
-import threading
-from Motor import *
-from servo import *
-from Led import *
-from Buzzer import *
-from ADC import *
-from Thread import *
-from Light import *
-from Ultrasonic import *
-from Line_Tracking import *
-from threading import Timer
 from threading import Thread
-from Command import COMMAND as cmd
+
+import picamera
+
+from server.Buzzer import *
+from server.Command import COMMAND as cmd
+from server.Led import *
+from server.Light import *
+from server.Line_Tracking import *
+from server.Motor import *
+from server.Thread import *
+from server.Ultrasonic import *
+from server.servo import *
 
 
 class Server:
@@ -42,20 +39,24 @@ class Server:
     def get_interface_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         return socket.inet_ntoa(
-            fcntl.ioctl(s.fileno(), 0x8915, struct.pack("256s", b"wlan0"[:15]))[20:24]
+            fcntl.ioctl(s.fileno(), 0x8915, struct.pack("256s", b"wlan0"[:15]))[
+                20:24
+            ]
         )
 
     def StartTcpServer(self):
         HOST = str(self.get_interface_ip())
         self.server_socket1 = socket.socket()
-        self.server_socket1.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+        self.server_socket1.setsockopt(
+            socket.SOL_SOCKET, socket.SO_REUSEPORT, 1
+        )
         self.server_socket1.bind((HOST, 5000))
         self.server_socket1.listen(1)
         self.server_socket = socket.socket()
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
         self.server_socket.bind((HOST, 8000))
         self.server_socket.listen(1)
-        print("Server address: " + HOST)
+        print("server address: " + HOST)
 
     def StopTcpServer(self):
         try:
@@ -136,15 +137,20 @@ class Server:
     def readdata(self):
         try:
             try:
-                self.connection1, self.client_address1 = self.server_socket1.accept()
-                print("Client connection successful !")
+                (
+                    self.connection1,
+                    self.client_address1,
+                ) = self.server_socket1.accept()
+                print("client connection successful !")
             except:
-                print("Client connect failed")
+                print("client connect failed")
             restCmd = ""
             self.server_socket1.close()
             while True:
                 try:
-                    AllData = restCmd + self.connection1.recv(1024).decode("utf-8")
+                    AllData = restCmd + self.connection1.recv(1024).decode(
+                        "utf-8"
+                    )
                 except:
                     if self.tcp_Flag:
                         self.Reset()
@@ -250,7 +256,9 @@ class Server:
                             except:
                                 pass
                             time.sleep(0.1)
-                            Led_Mode = Thread(target=self.led.ledMode, args=(data[1],))
+                            Led_Mode = Thread(
+                                target=self.led.ledMode, args=(data[1],)
+                            )
                             Led_Mode.start()
                     elif cmd.CMD_SONIC in data:
                         if data[1] == "1":
@@ -269,14 +277,18 @@ class Server:
                     elif cmd.CMD_LIGHT in data:
                         if data[1] == "1":
                             self.Light = True
-                            self.lightTimer = threading.Timer(0.3, self.sendLight)
+                            self.lightTimer = threading.Timer(
+                                0.3, self.sendLight
+                            )
                             self.lightTimer.start()
                         else:
                             self.Light = False
                     elif cmd.CMD_POWER in data:
                         ADC_Power = self.adc.recvADC(2) * 3
                         try:
-                            self.send(cmd.CMD_POWER + "#" + str(ADC_Power) + "\n")
+                            self.send(
+                                cmd.CMD_POWER + "#" + str(ADC_Power) + "\n"
+                            )
                         except:
                             pass
         except Exception as e:
@@ -300,7 +312,12 @@ class Server:
             ADC_Light2 = self.adc.recvADC(1)
             try:
                 self.send(
-                    cmd.CMD_LIGHT + "#" + str(ADC_Light1) + "#" + str(ADC_Light2) + "\n"
+                    cmd.CMD_LIGHT
+                    + "#"
+                    + str(ADC_Light1)
+                    + "#"
+                    + str(ADC_Light2)
+                    + "\n"
                 )
             except:
                 self.Light = False

@@ -1,6 +1,9 @@
 import time
-import RPi.GPIO as GPIO
-from Command import COMMAND as cmd
+
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    import fake_rpi.RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
 Buzzer_Pin = 17

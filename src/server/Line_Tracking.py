@@ -1,6 +1,9 @@
-import time
-from Motor import *
-import RPi.GPIO as GPIO
+from server.Motor import *
+
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    import fake_rpi.RPi.GPIO as GPIO
 
 
 class Line_Tracking:

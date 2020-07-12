@@ -1,5 +1,6 @@
 import time
-from PCA9685 import PCA9685
+
+from server.PCA9685 import PCA9685
 
 
 class Motor:

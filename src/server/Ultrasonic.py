@@ -1,8 +1,9 @@
-import time
-from Motor import *
-import RPi.GPIO as GPIO
-from servo import *
-from PCA9685 import PCA9685
+from server.Motor import *
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    import fake_rpi.RPi.GPIO as GPIO
+from server.servo import *
 
 
 class Ultrasonic:
