@@ -7,10 +7,10 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from client.Client_Ui import Ui_Client
-from client.Command import COMMAND as cmd
-from client.Thread import *
-from client.Video import *
+from autobot.client.Client_Ui import Ui_Client
+from autobot.client.Command import COMMAND as cmd
+from autobot.client.Thread import *
+from autobot.client.Video import *
 
 
 class mywindow(QMainWindow, Ui_Client):

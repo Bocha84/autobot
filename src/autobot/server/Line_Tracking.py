@@ -1,4 +1,4 @@
-from server.Motor import *
+from autobot.server.Motor import *
 
 try:
     import RPi.GPIO as GPIO

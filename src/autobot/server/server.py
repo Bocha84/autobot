@@ -8,15 +8,14 @@ from threading import Thread
 
 import picamera
 
-from server.Buzzer import *
-from server.Command import COMMAND as cmd
-from server.Led import *
-from server.Light import *
-from server.Line_Tracking import *
-from server.Motor import *
-from server.Thread import *
-from server.Ultrasonic import *
-from server.servo import *
+from autobot.server.Buzzer import *
+from autobot.server import COMMAND as cmd
+from autobot.server.Led import *
+from autobot.server.Light import *
+from autobot.server.Line_Tracking import *
+from autobot.server.Thread import *
+from autobot.server.Ultrasonic import *
+from autobot.server.servo import *
 
 
 class Server:

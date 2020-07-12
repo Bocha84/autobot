@@ -1,4 +1,4 @@
-from server.Led import *
+from autobot.server.Led import *
 
 led = Led()
 
@@ -24,7 +24,7 @@ def test_Led():
         print("\nEnd of program")
 
 
-from server.Motor import *
+from autobot.server.Motor import *
 
 PWM = Motor()
 
@@ -50,7 +50,7 @@ def test_Motor():
         print("\nEnd of program")
 
 
-from server.Ultrasonic import *
+from autobot.server.Ultrasonic import *
 
 ultrasonic = Ultrasonic()
 
@@ -65,7 +65,7 @@ def test_Ultrasonic():
         print("\nEnd of program")
 
 
-from server.Line_Tracking import *
+from autobot.server.Line_Tracking import *
 
 line = Line_Tracking()
 
@@ -95,7 +95,7 @@ def test_Infrared():
         print("\nEnd of program")
 
 
-from server.servo import *
+from autobot.server.servo import *
 
 pwm = Servo()
 
@@ -121,7 +121,7 @@ def test_Servo():
         print("\nEnd of program")
 
 
-from server.ADC import *
+from autobot.server.ADC import *
 
 adc = Adc()
 
@@ -149,7 +149,7 @@ def test_Adc():
         print("\nEnd of program")
 
 
-from server.Buzzer import *
+from autobot.server.Buzzer import *
 
 buzzer = Buzzer()
 

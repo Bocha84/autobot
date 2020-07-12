@@ -7,9 +7,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from server.Thread import *
-from server.server import Server
-from server.server_ui import Ui_server_ui
+from autobot.server.Thread import *
+from autobot.server import Server
+from autobot.server import Ui_server_ui
 
 
 class mywindow(QMainWindow, Ui_server_ui):

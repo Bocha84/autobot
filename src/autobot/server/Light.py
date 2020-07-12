@@ -1,5 +1,5 @@
-from server.ADC import *
-from server.Motor import *
+from autobot.server.ADC import *
+from autobot.server.Motor import *
 
 
 class Light:

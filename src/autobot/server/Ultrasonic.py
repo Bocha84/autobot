@@ -1,9 +1,9 @@
-from server.Motor import *
+from autobot.server.Motor import *
 try:
     import RPi.GPIO as GPIO
 except ImportError:
     import fake_rpi.RPi.GPIO as GPIO
-from server.servo import *
+from autobot.server.servo import *
 
 
 class Ultrasonic:
