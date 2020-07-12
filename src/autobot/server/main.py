@@ -6,10 +6,9 @@ from threading import Thread
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
 from autobot.server.Thread import *
-from autobot.server import Server
-from autobot.server import Ui_server_ui
+from autobot.server.server import Server
+from autobot.server.server_ui import Ui_server_ui
 
 
 class mywindow(QMainWindow, Ui_server_ui):
