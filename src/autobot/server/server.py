@@ -9,7 +9,7 @@ from threading import Thread
 import picamera
 
 from autobot.server.Buzzer import *
-from autobot.server import COMMAND as cmd
+from autobot.server.Command import COMMAND as cmd
 from autobot.server.Led import *
 from autobot.server.Light import *
 from autobot.server.Line_Tracking import *
